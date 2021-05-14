@@ -6,6 +6,8 @@
       "dom.iterable",
       "esnext"
     ],
+    "removeComments": false,
+    "sourceMap": false,
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -21,13 +23,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "src/stories/*",
-    "**/*.test.tsx",
-    "**/*.test.ts"
+    "src"
   ]
 }
