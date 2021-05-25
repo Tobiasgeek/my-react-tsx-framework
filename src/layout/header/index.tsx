@@ -16,7 +16,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import logo from '../../logo.svg';
 
@@ -62,11 +62,19 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-function Header() {
+const Header = () => {
+    const history = useHistory();
     const classes = useStyles();
     const [state, setState] = React.useState({
         menu:false
     })
+
+    const navmenu = [
+        { name:"Home", link:"/" },
+        { name:"Register", link:"/register" },
+        { name:"Login", link:"/login" },
+        { name:"Forgot", link:"/forgot" },
+    ]
 
     const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent,) => {
         if ( event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift') ) {
@@ -75,6 +83,12 @@ function Header() {
 
         setState({ ...state, menu: open });
     };
+
+    const navigateTo = (link:string) => (event: React.KeyboardEvent | React.MouseEvent,) => {
+        setState({ ...state, menu: false });
+        history.push(link)
+        return;
+    }
   
     return(
         <div>
@@ -114,9 +128,9 @@ function Header() {
                     </IconButton>
                 </div>
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemText primary={text} />
+                    {navmenu.map((item, index) => (
+                    <ListItem button={true} key={index} onClick={navigateTo(item.link)}>
+                        <ListItemText primary={item.name} />
                     </ListItem>
                     ))}
                 </List>
