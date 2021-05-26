@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@material-ui/core'
+import { Container, ThemeProvider} from '@material-ui/core'
 
 import {
     BrowserRouter as Router,
@@ -16,12 +16,19 @@ import Login from './views/Login';
 import ForgotPassword from './views/ForgotPassword';
 import Verify from './views/Verify';
 
+import themeMode from './theme';
+
+const user = () => {
+    return {
+        name:'Toby'
+    }
+}
 
 const App = () => {
     return (
-        <Router>
-            <div>
-                <Header />
+        <ThemeProvider theme={themeMode}>
+            <Router>
+                <Header user={user()} />
                 <Container maxWidth="xl">
                     <Switch>
                         <Route exact path="/">
@@ -41,9 +48,9 @@ const App = () => {
                         </Route>
                     </Switch>
                 </Container>
-            </div>
-        </Router>
-    );
-};
+            </Router>
+        </ThemeProvider>
+    )
+}
 
 export default App;

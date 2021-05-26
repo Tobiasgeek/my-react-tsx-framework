@@ -1,20 +1,18 @@
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
 
 const theme = responsiveFontSizes(
     createMuiTheme({
         palette: {
             type: "light",
             primary: {
-                light: "#7986cb",
-                main: "#3f51b5",
-                dark: "#303f9f",
-                contrastText: "#fff"
+              main: "rgba(49%, 63.5%, 66.3%, 1)",
             },
-            secondary: {
-                light: "#ff4081",
-                main: "#f50057",
-                dark: "#c51162",
-                contrastText: "#fff"
+            secondary:{
+              main: "#5E75A0",
+            },
+            background:{
+              paper: "rgba(96.9%, 96.9%, 96.9%, 1)",
+              default: "rgba(100%, 100%, 100%, 1)"
             }
         },
         typography:{
@@ -23,14 +21,30 @@ const theme = responsiveFontSizes(
             h2:{},
             h3:{},
             h4:{},
-            h5:{},
-            h6:{},
+            h5:{
+              display:'inline'
+            },
+            h6:{
+              display:'inline'
+            },
             body1:{},
             body2:{},
             subtitle1:{},
             subtitle2:{},
             caption:{},
             overline:{}
+        },
+        overrides: {
+          MuiButton: {
+            root: {
+              background:'linear-gradient(45deg, rgba(49%, 63.5%, 66.3%, 1) 30%, #5E75A0 90%)',
+            },
+            label:{
+              fontSize:'1.2em',
+              color:'#fff',
+              padding:'0.1em 0.5em'
+            }
+          }
         }
     })
 );

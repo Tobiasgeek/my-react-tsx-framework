@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    createMuiTheme,
     Drawer,
     List,
     ListItem,
@@ -11,7 +12,8 @@ import {
     IconButton,
     Toolbar,
     Typography,
-    Theme
+    Theme,
+    Switch
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -62,11 +64,13 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Header = () => {
+const Header = (props?:any) => {
+
     const history = useHistory();
     const classes = useStyles();
     const [state, setState] = React.useState({
-        menu:false
+        menu:false,
+        darkMode:false,
     })
 
     const navmenu = [
@@ -81,14 +85,23 @@ const Header = () => {
             return;
         }
 
-        setState({ ...state, menu: open });
-    };
+        setState({ ...state, menu: open })
+    }
 
     const navigateTo = (link:string) => (event: React.KeyboardEvent | React.MouseEvent,) => {
-        setState({ ...state, menu: false });
+        setState({ ...state, menu: false })
         history.push(link)
-        return;
+        return
     }
+
+    const handleThemeMode = (event:React.ChangeEvent<HTMLInputElement>, buttonState:boolean) => {
+        setState({
+            ...state,
+            darkMode: buttonState
+        })
+        return
+    }
+
   
     return(
         <div>
@@ -101,6 +114,8 @@ const Header = () => {
                         <Link to="/">
                             <img src={logo} alt="" className={classes.logo} />
                         </Link>
+                        <Switch checked={state.darkMode} name="darkMode" onChange={handleThemeMode} />
+                        <Typography variant="h6">{props.user.name}</Typography>
                     </div>
 
                     <div className={classes.rightsection}>
@@ -117,7 +132,7 @@ const Header = () => {
             <Drawer
             className={classes.drawer}
             classes={{
-              paper: classes.drawerPaper,
+            paper: classes.drawerPaper,
             }}
             anchor="left"
             open={state.menu}
